@@ -20,3 +20,7 @@ Repozytorium ćwiczeń z projektów ML wykonywanych zgodnie z filozofią tidymod
 ## commit pull push
 
 ## branch
+
+1) tworzenie branch z poziomu rstudio
+2) wysyłanie zatwierdzeń
+3) gdzie trafiły zatwierdzenia
