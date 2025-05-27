@@ -26,13 +26,13 @@ new_f(x = letters)
 
 letters |> str()
 
-ggplot(dane, aes(x = x, y = y)) +
+y <- new_f(x=dane)
+
+df <- data.frame(x = dane, y = y)
+
+ggplot(df, aes(x = x, y = y)) +
   geom_point(color = "blue", size = 3) +
   geom_line(color = "blue") +
-  labs(
-    title = "Wykres x od y",
-    x = "x",
-    y = "y"
-  ) +
+  labs(title = "Wykres") +
   theme_minimal()
 

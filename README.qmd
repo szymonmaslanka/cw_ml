@@ -1,0 +1,22 @@
+---
+title: "Ćwiczenia z przedmiotu ZRiSKW"
+author: "Szymon Maślanka"
+format: gfm
+    
+---
+
+## Intro
+
+Repozytorium ćwiczeń z projektów ML wykonywanych zgodnie z filozofią tidymodels
+
+## Dobre praktyki
+
+* .gitignore (`*.rozszerzenie`,`folder/`,`/.quarto/`)
+* nie generuj folderu plików pomocniczych przy renderowaniu quarto(`self-contained: true` i `embed-resources: true`)
+* Rstudio -> tools -> git -> sign(puste)
+* cache - przyspiesze renderowanie dokumentów
+* qmd -> md(format: gfm)
+
+## commit pull push
+
+## branch
