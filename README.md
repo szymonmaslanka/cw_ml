@@ -1,12 +1,20 @@
-# test
+# Ćwiczenia z przedmiotu ZRiSKW
+Szymon Maślanka
 
+## Intro
 
-## Testowy plik quarto
+Repozytorium ćwiczeń z projektów ML wykonywanych zgodnie z filozofią
+tidymodels
 
-Witam
+## Dobre praktyki
 
-``` r
-1+1
-```
+- .gitignore (`*.rozszerzenie`,`folder/`,`/.quarto/`)
+- nie generuj folderu plików pomocniczych przy renderowaniu
+  quarto(`self-contained: true` i `embed-resources: true`)
+- Rstudio -\> tools -\> git -\> sign(puste)
+- cache - przyspiesze renderowanie dokumentów
+- qmd -\> md(format: gfm)
 
-    [1] 2
+## commit pull push
+
+## branch
