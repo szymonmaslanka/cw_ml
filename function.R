@@ -30,8 +30,9 @@ ggplot(dane, aes(x = x, y = y)) +
   geom_point(color = "blue", size = 3) +
   geom_line(color = "blue") +
   labs(
-    title = "Wykres y = x/10 + sqrt(x)",
+    title = "Wykres x od y",
     x = "x",
     y = "y"
   ) +
   theme_minimal()
+
