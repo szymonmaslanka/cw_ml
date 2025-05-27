@@ -50,4 +50,4 @@ po/*~
 rsconnect/
 
 #Ignore quarto files
-/quarto/
+/.quarto/
