@@ -170,4 +170,84 @@ ggplot(urchins,
   geom_jitter() +                         # same
   geom_smooth(method = lm, se = FALSE) +  # same                    
   labs(x = "Volume", y = "Width")         # etc
+  
+## Ćwiczenie 1
 
+```{r}
+library(tidyverse)    # do manipulacji danymi
+library(GGally)       # do eksploracji danych
+
+colnames(airquality) <- tolower(colnames(airquality)) # Zmieniamy nazwy kolumn na małe litery, by ułatwić pracę
+
+air <- airquality |>
+  as_tibble() |>        # konwersja na tibble
+  na.omit() |>          # usunięcie wierszy z brakującymi danymi
+  select(-day) |>       # usunięcie zmiennej 'day', nie będzie używana w modelu
+  mutate(month = factor(month))  # przekształcenie zmiennej 'month' w zmienną kategorialną (czynnik)
+
+air 
+
+lm_mod1 <-  # ustawienie metody estymacji
+  linear_reg() |> 
+  set_engine("lm")
+
+lm_fit1 <-  # Formuła R i estymacja
+  lm_mod1 |>
+  fit(ozone ~ solar.r * wind * temp * month, data = air)
+lm_fit1
+
+# Lepsza prezentacja i wykres 
+
+print(lm_fit1, digits = 5)
+
+lm_fit1$fit |> summary()
+
+lm_fit1 |> tidy()
+
+lm_fit1 |> tidy(conf.int = T) |> print(n=40)
+
+lm_fit1 |> 
+  tidy() |> 
+  dwplot(vline = geom_vline(xintercept = 0, color = "grey50", linetype = 2), 
+         dot_args = list(size = 0,5, color = "black"), 
+         whisker_args = list(color = "black")) +
+  theme_bw()
+
+# Miesiące nie wpływają na o3 ponieważ przekraczają zero.
+
+# Tworzenie siatki nowych punktów predykcyjnych 
+new_points <- expand.grid(
+  temp = seq(70, 90, by = 5),
+  month = factor(c(5, 6, 7, 8, 9)),
+  wind = median(air$wind),
+  solar.r = median(air$solar.r)
+)
+
+# Konwersja do tibble
+new_points <- as_tibble(new_points)
+
+# Prognoza wartości średnich
+mean_pred <- predict(lm_fit1, new_data = new_points)
+
+# Prognoza przedziałów ufności
+conf_pred <- predict(lm_fit1, new_data = new_points, type = "conf_int")
+
+# Łączenie prognoz z danymi wejściowymi
+lm_pred <- new_points |>
+  bind_cols(mean_pred) |>
+  bind_cols(conf_pred)
+
+# Wykres: prognozowana wartość O3 wraz z przedziałami ufności
+lm_pred |>
+  ggplot(aes(x = month, y = .pred)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = .pred_lower, ymax = .pred_upper),
+                width = 0.2) +
+  facet_wrap(~ temp) +
+  theme_bw() +
+  labs(
+    y = "Przewidywany poziom O₃",
+    x = "Miesiąc",
+    title = "Prognoza poziomu ozonu (O₃) względem temperatury i miesiąca"
+  )
+```
