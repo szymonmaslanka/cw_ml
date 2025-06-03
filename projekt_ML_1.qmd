@@ -173,6 +173,7 @@ ggplot(urchins,
   
 ## Ćwiczenie 1
 
+```{r}
 library(tidyverse)    # do manipulacji danymi
 library(GGally)       # do eksploracji danych
 
@@ -186,14 +187,16 @@ air <- airquality |>
 
 air 
 
-lm_mod1 <- 
+lm_mod1 <-  # ustawienie metody estymacji
   linear_reg() |> 
   set_engine("lm")
 
-lm_fit1 <-  
+lm_fit1 <-  # Formuła R i estymacja
   lm_mod1 |>
   fit(ozone ~ solar.r * wind * temp * month, data = air)
 lm_fit1
+
+# Lepsza prezentacja i wykres 
 
 print(lm_fit1, digits = 5)
 
@@ -210,7 +213,7 @@ lm_fit1 |>
          whisker_args = list(color = "black")) +
   theme_bw()
 
-Miesiące nie wpływają na o3 ponieważ przekraczają zero.
+# Miesiące nie wpływają na o3 ponieważ przekraczają zero.
 
 # Tworzenie siatki nowych punktów predykcyjnych 
 new_points <- expand.grid(
@@ -247,4 +250,4 @@ lm_pred |>
     x = "Miesiąc",
     title = "Prognoza poziomu ozonu (O₃) względem temperatury i miesiąca"
   )
-
+```
