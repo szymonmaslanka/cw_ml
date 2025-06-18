@@ -141,3 +141,5 @@ pred_test  |>
 
 pred_test |> 
   roc_auc(truth = arr_delay, .pred_late)
+
+pred_test |> summary()
