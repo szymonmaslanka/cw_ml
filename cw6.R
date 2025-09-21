@@ -28,13 +28,11 @@ pkg |>
 
 tidymodels_prefer()
 
-# Wybierz lokalizacje na podstawie danych w tabeli i wczytaj dowolny zestaw danych:
-
 importMeta(source = "aurn") |> knitr::kable()
 
 dane <- importAURN(site = "kc1", year = 2021)
 
-# przyjrzy się danym 
+
 
 skimr::skim(dane)
 
@@ -44,12 +42,9 @@ dane <- dane |>
 
 dane
 wd_factor <- function(dane, wd, name = "short", ...){
-  
-  # przedziały kierunku wiatruliczbowe 
+
   
   rose_breaks <- c(0, 360/32, (1/32 + (1:15 / 16)) * 360, 360)
-  
-  # etykiety kierunku wiatru krótkie i długie a
   
   if (name == "long") {
     rose_labs <- c(
@@ -84,12 +79,9 @@ wd_factor <- function(dane, wd, name = "short", ...){
            ...	 
     )
   
-  # wynik
-  
   return(dane) 
 }
 
-# Dodajemy zmienną kategoryczną
 dane2 <- dane |> wd_factor(wd = wd)
 
 dane2
